@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stock Market</title>
+
+  <!-- Bootstrap CSS and JS-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+
+  <!-- D3 JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+
+  <!-- Plotly JS -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <!-- <script src="plotly-latest.min.js"></script> -->
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+  integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+  crossorigin=""/>
+
+  <!-- <script type="text/javascript" src="{{ url_for('static', filename='config.js') }}" defer></script> -->
+
+  <!-- Custom CSS and JS -->
+  <!-- <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet"> -->
+  
+  <!-- <script src="../static/js/app.js" defer></script> -->
+  <script src="../static/js/app1.js" defer></script>
+  <!-- <script src="../static/js/app2.js" defer></script> -->
+  <!-- <script src="../static/js/app3.js" defer></script> -->
+
+  <!-- ss correlation-->
+  <script src="https://unpkg.com/simple-statistics@5.0.0/dist/simple-statistics.min.js"></script>
+  
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js" integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q==" crossorigin=""></script>
+  <!-- API key -->
+  <script type="text/javascript" src="static/js/config.js"></script>
+  
+  <!-- D3 CDN -->
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <!-- JS -->
+  <style> body {background-color: lightgray;}</style>
+  <style> .card {background-color: lightgray;}</style>
+  <sstyle> .tableauPlaceholder {align-content: center}</sstyle>
+</head>
+
+<body>
+  <!--Start Nav Bar-->  
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <img src="C:\Users\Jeawills\Desktop\Homework\project2\logo.jpg" class="img-logo" alt="..."><br> 
+    <a class="navbar-brand" href="#"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="maps.html">Maps</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Data</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Options
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">Income/Expenditures</a>
+            <a class="dropdown-item" href="#">Home Prices</a>
+            <a class="dropdown-item" href="#">Crime Rate</a>
+            <a class="dropdown-item" href="#">School Rating</a>
+            <a class="dropdown-item" href="#">Reviews</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!--End of Nav Bar-->
+
+  <!--Page Head and Title-->
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4 text-dark">Stock Market Prices</h1>
+      <p class="lead">How does stock market behave over the past twenty years?</p>
+    </div>
+  </div>
+  
+  <!--Page Body-->
+  <!-- Tableau Card
+  <div class="card text-center">
+    <div class="card-header"></div>
+    <div class="card-body">
+      <div class='tableauPlaceholder' id='viz1614833538310' style='align-content: center'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;St&#47;StockMarketAnalysis_16148159340840&#47;TrendAnalysis&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='StockMarketAnalysis_16148159340840&#47;TrendAnalysis' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;St&#47;StockMarketAnalysis_16148159340840&#47;TrendAnalysis&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1614833538310');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else { vizElement.style.width='100%';vizElement.style.height='1677px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+    </div>
+  </div>
+  <hr> -->
+  <!-- Card Start-->
+  <div class="row row-cols-1 row-cols-md-4 g-3">
+    <div class="col">
+      <div class="card border-light rounded h-100">
+        <div class="card-body">
+          <h4 class="card-title">Sectors</h4>
+          <p class="card-text">Select Sectors</p>
+          <hr>
+          <select id="sector1" class="btn btn-secondary btn-sm dropdown-toggle"></select>
+        <br>
+        <br>
+        <select id="sector2" class="btn btn-secondary btn-sm dropdown-toggle"></select>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card border-light rounded h-100">
+        <div class="card-body">
+          <h4 class="card-title">Stocks</h4>
+          <p class="card-text">Select Stocks</p>
+          <hr>
+          <select id="stock1" class="btn btn-secondary btn-sm dropdown-toggle"></select>
+          <br>
+          <br>
+          <select id="stock2" class="btn btn-secondary btn-sm dropdown-toggle"></select>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card border-light rounded h-100">
+        <div class="card-body">
+          <h4 class="card-title">Date</h4>
+          <p class="card-text">Select Dates</p>
+          <hr>
+          <select id="start_date" class="btn btn-warning btn-sm dropdown-toggle"></select>
+          <br>
+          <br>
+          <select id="end_date" class="btn btn-warning btn-sm dropdown-toggle"></select>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card border-light rounded h-100">
+        <div class="card-body">
+          <button id="submit" type="submit" class="btn btn-success">Plot Stock</button>
+          <br>
+          <p> See Stocks Performance</p>
+          <hr>
+          <span id="description1" class="badge rounded-pill bg-secondary text-light"></span>
+          <br>
+          <br>
+          <span id="description2" class="badge rounded-pill bg-secondary text-light"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Card End-->
+  <hr>
+  
+  <!--Stock Plot-->
+  <div class="row">
+    <div class="col-md-6" id="correPlot"></div>
+    <div class="col-md-6" id="comparisonPlot"></div>
+  </div>
+  <br>
+
+    <!-- Tableau Card-->
+    <div class="card text-center border-light rounded">
+      <div class="card-body">
+        <div class='tableauPlaceholder' id='viz1614833538310' style='align-content: center'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;St&#47;StockMarketAnalysis_16148159340840&#47;TrendAnalysis&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='StockMarketAnalysis_16148159340840&#47;TrendAnalysis' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;St&#47;StockMarketAnalysis_16148159340840&#47;TrendAnalysis&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1614833538310');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else { vizElement.style.width='100%';vizElement.style.height='1677px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+      </div>
+    </div>
+    <hr>
+
+
+  <!--Stock Data Table-->
+  <!-- <div class="row">
+    <div class="col-md-8">
+      <h3 id="tableTitle"></h3>
+      <br>
+      <table id="summary-table" class="table table-striped">
+        <thead>
+          <tr id="housing-head">
+            <th class="table-head">Date</th>
+            <th class="table-head">Open Price</th>
+            <th class="table-head">High Price</th>
+            <th class="table-head">Low Price</th>
+            <th class="table-head">Close Price</th>
+            <th class="table-head">Volume</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div> -->
+</div>
+
+<script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+    crossorigin=""></script>
+
+
+<!-- Leaflet-Choropleth JavaScript -->
+<script type="text/javascript" src="static/js/choropleth.js"></script>
+
+  <!-- Optional JavaScript; choose one of the two! -->
+
+  <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
