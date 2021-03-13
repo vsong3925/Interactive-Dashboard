@@ -31,6 +31,9 @@
   <!-- <script src="../static/js/app2.js" defer></script> -->
   <!-- <script src="../static/js/app3.js" defer></script> -->
 
+  <!-- SDK AWS
+  <script src="https://sdk.amazonaws.com/js/aws-sdk-2.862.0.min.js"></script> -->
+
   <!-- ss correlation-->
   <script src="https://unpkg.com/simple-statistics@5.0.0/dist/simple-statistics.min.js"></script>
   
@@ -44,13 +47,13 @@
   <!-- JS -->
   <style> body {background-color: lightgray;}</style>
   <style> .card {background-color: lightgray;}</style>
-  <sstyle> .tableauPlaceholder {align-content: center}</sstyle>
+  <style> .tableauPlaceholder {align-content: center}</style>
 </head>
 
 <body>
   <!--Start Nav Bar-->  
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <img src="C:\Users\Jeawills\Desktop\Homework\project2\logo.jpg" class="img-logo" alt="..."><br> 
+    <!-- <img src="C:\Users\Jeawills\Desktop\Homework\project2\logo.jpg" class="img-logo" alt="..."><br>  -->
     <a class="navbar-brand" href="#"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -173,6 +176,27 @@
       </div>
     </div>
     <hr>
+
+    <!--Predicition Plot-->
+    <div class="row">
+      <div class="col-md-6" id="predictStock1">
+        <h5>Dow Jones Close Price Prediction</h5>
+        <img src='../static/images/djones_figure.png'>
+      </div>
+      <div class="col-md-6" id="predictStock2">
+        <h5>S&P500 Close Price Prediction</h5>
+        <img src='../static/images/sp500_figure.png'>
+      </div>
+    </div>  
+
+    <div class="row">
+      <div class="col-md-6" id="predictStock3">
+        <h5>NASDAQ Close Price Prediction</h5>
+        <img src='../static/images/nasdaq_figure.png'>
+      </div>
+      <div class="col-md-6" id="predictStock4"></div>
+    </div>
+    <br>
 
 
   <!--Stock Data Table-->
