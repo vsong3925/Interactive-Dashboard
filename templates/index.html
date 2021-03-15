@@ -26,13 +26,8 @@
   <!-- Custom CSS and JS -->
   <!-- <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet"> -->
   
-  <!-- <script src="../static/js/app.js" defer></script> -->
-  <script src="../static/js/app1.js" defer></script>
-  <!-- <script src="../static/js/app2.js" defer></script> -->
-  <!-- <script src="../static/js/app3.js" defer></script> -->
-
-  <!-- SDK AWS
-  <script src="https://sdk.amazonaws.com/js/aws-sdk-2.862.0.min.js"></script> -->
+  <!-- !!!!!!  Vera's app_stockmarket.js   !!!!!!!!!!!!!!!!!!!!!!-->
+  <script src="../static/js/app_stockmarket.js" defer></script>
 
   <!-- ss correlation-->
   <script src="https://unpkg.com/simple-statistics@5.0.0/dist/simple-statistics.min.js"></script>
@@ -94,15 +89,9 @@
     </div>
   </div>
   
+  
+  <!-- !!!!!!!!!!!!!!!!!!   Page Body Part   !!!!!!!!!!!!!!!!!!!!!!!!!! -->
   <!--Page Body-->
-  <!-- Tableau Card
-  <div class="card text-center">
-    <div class="card-header"></div>
-    <div class="card-body">
-      <div class='tableauPlaceholder' id='viz1614833538310' style='align-content: center'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;St&#47;StockMarketAnalysis_16148159340840&#47;TrendAnalysis&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='StockMarketAnalysis_16148159340840&#47;TrendAnalysis' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;St&#47;StockMarketAnalysis_16148159340840&#47;TrendAnalysis&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1614833538310');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else { vizElement.style.width='100%';vizElement.style.height='1677px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
-    </div>
-  </div>
-  <hr> -->
   <!-- Card Start-->
   <div class="row row-cols-1 row-cols-md-4 g-3">
     <div class="col">
@@ -177,48 +166,16 @@
     </div>
     <hr>
 
-    <!--Predicition Plot-->
-    <div class="row">
-      <div class="col-md-6" id="predictStock1">
-        <h5>Dow Jones Close Price Prediction</h5>
-        <img src='../static/images/djones_figure.png'>
+    <!--Predicition Tableau Plot-->
+    <div class="card text-center border-light rounded">
+      <div class="card-body">
+        <div class='tableauPlaceholder' id='viz1615781706053' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;St&#47;StockMarketPrediction_16157795216330&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='StockMarketPrediction_16157795216330&#47;Dashboard1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;St&#47;StockMarketPrediction_16157795216330&#47;Dashboard1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1615781706053');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else { vizElement.style.width='100%';vizElement.style.height='1577px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
       </div>
-      <div class="col-md-6" id="predictStock2">
-        <h5>S&P500 Close Price Prediction</h5>
-        <img src='../static/images/sp500_figure.png'>
-      </div>
-    </div>  
-
-    <div class="row">
-      <div class="col-md-6" id="predictStock3">
-        <h5>NASDAQ Close Price Prediction</h5>
-        <img src='../static/images/nasdaq_figure.png'>
-      </div>
-      <div class="col-md-6" id="predictStock4"></div>
     </div>
-    <br>
-
-
-  <!--Stock Data Table-->
-  <!-- <div class="row">
-    <div class="col-md-8">
-      <h3 id="tableTitle"></h3>
-      <br>
-      <table id="summary-table" class="table table-striped">
-        <thead>
-          <tr id="housing-head">
-            <th class="table-head">Date</th>
-            <th class="table-head">Open Price</th>
-            <th class="table-head">High Price</th>
-            <th class="table-head">Low Price</th>
-            <th class="table-head">Close Price</th>
-            <th class="table-head">Volume</th>
-          </tr>
-        </thead>
-        <tbody id="tbody"></tbody>
-      </table>
-    </div> -->
 </div>
+<!-- !!!!!!!!!!!!!!!!!!!   End of Stock Market Stuff      !!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+
 
 <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
     integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="

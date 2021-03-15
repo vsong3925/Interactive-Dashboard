@@ -9,15 +9,10 @@ import pymysql
 import datetime
 #%%
 from config import remote_db_endpoint, remote_db_port, remote_db_name, remote_db_user, remote_db_pwd
-
-#%%
-#from fbprophet import Prophet
 #%%
 pymysql.install_as_MySQLdb()
 engine = create_engine(f"mysql://{remote_db_user}:{remote_db_pwd}@{remote_db_endpoint}:{remote_db_port}/{remote_db_name}")
-
 #%%
-
 app = Flask(__name__)
 
 #%%
@@ -25,22 +20,6 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     return render_template("index.html")
-
-#%%
-
-@app.route("/nasdaq")
-def nasdaq():
-    conn = engine.connect()
-
-    query = '''
-    select * from NASDAQ
-    '''
-
-    nasdaq_data = pd.read_sql(query, con=conn)
-    nasdaq_json = nasdaq_data.to_json(orient="records")
-
-    conn.close()
-    return nasdaq_json
 
 #%%
 
