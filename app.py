@@ -8,10 +8,27 @@ from sqlalchemy import create_engine
 import pymysql
 import datetime
 #%%
-from config import remote_db_endpoint, remote_db_port, remote_db_name, remote_db_user, remote_db_pwd
+# from config import remote_db_endpoint, remote_db_port, remote_db_name, remote_db_user, remote_db_pwd
 #%%
-pymysql.install_as_MySQLdb()
-engine = create_engine(f"mysql://{remote_db_user}:{remote_db_pwd}@{remote_db_endpoint}:{remote_db_port}/{remote_db_name}")
+is_heroku = False
+if 'IS_HEROKU' in os.environ:
+    is_heroku = True
+# Config variables
+# Import your config file(s) and variable(s)
+if is_heroku == True:
+    # if IS_HEROKU is found in the environment variables, then use the rest
+    # NOTE: you still need to set up the IS_HEROKU environment variable on Heroku (it is not there by default)
+    remote_db_endpoint = os.environ.get('remote_db_endpoint')
+    remote_db_port = os.environ.get('remote_db_port')
+    remote_db_name = os.environ.get('remote_db_name')
+    remote_db_user = os.environ.get('remote_db_user')
+    remote_db_pwd = os.environ.get('remote_db_pwd')
+    API_key = os.environ.get('API_key')
+    api_key = os.environ.get('api_key')
+else:
+    # use the config.py file if IS_HEROKU is not detected
+    from config import remote_db_endpoint, remote_db_port, remote_db_name, remote_db_user, remote_db_pwd, API_key, api_key
+
 #%%
 app = Flask(__name__)
 
@@ -22,7 +39,6 @@ def index():
     return render_template("index.html")
 
 #%%
-
 @app.route("/tickerlist")
 def tickerlist(): 
     
@@ -33,7 +49,6 @@ def tickerlist():
     
     return tickerlist_json
 #%%
-
 if __name__ == "__main__":
     app.run(debug=True)
 #%%

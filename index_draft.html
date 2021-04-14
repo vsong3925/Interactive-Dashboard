@@ -51,6 +51,17 @@
   <script src="../static/js/app_stockmarket.js" defer></script>
   <script src="{{ url_for('static', filename='./js/logic.js')}}" defer></script>
 
+  <!--Ecos-Meakin-->
+  <!-- <script src="{{ url_for('static', filename='./js/app.js')}}" defer></script>
+  <script src="{{ url_for('static', filename='./js/stress_test.js')}}" defer></script>
+  <script src="{{ url_for('static', filename='./js/plots.js')}}" defer></script>
+  <script src="{{ url_for('static', filename='./js/analysis.js')}}" defer></script> -->
+
+  <!-- JS -->
+  <!-- <style> body {background-color: lightgray;}</style>
+  <style> .card {background-color: lightgray;}</style>
+  <style> .tableauPlaceholder {align-content: center}</style> -->
+
 </head>
 
 <body id="pagebody">
@@ -65,12 +76,12 @@
         <li class="nav-item active">
           <a class="nav-link" id="navselect" href="#">Dashboard<span class="sr-only"></span></a>
         </li>
-        <!-- <li class="nav-item">
+        <li class="nav-item">
           <a class="nav-link" href=# id="navselect">Track Investment</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#" id="navselect">Track Stocks</a>
-        </li> -->
+        </li>
         <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Options
@@ -91,13 +102,14 @@
   <!--Page Head and Title-->
   <div class="jumbotron jumbotron-fluid" id="header">
     <div class="container">
-      <h1 class="display-4" id="headline">Stock Tracker</h1>
-      <p class="lead" id="headline">Track your investment and compare any two stock</p>
+      <h1 class="display-4" id="headline">Stocks Market Performance</h1>
+      <p class="lead" id="headline">Track your investment in here.</p>
     </div>
   </div>
   
   
-  <!-- **********************************  Page Body Start ************************************* -->
+  <!-- !!!!!!!!!!!!!!!!!!   Page Body Part   !!!!!!!!!!!!!!!!!!!!!!!!!! -->
+  <!--Page Body-->
   <!-- Card Start-->
   <div class="container-lg">
     <div class="row row-cols-1 row-cols-md-4 g-3">
@@ -185,9 +197,163 @@
   <!-- ************************************* End of Stock Market Dashboard ************************************* -->
 
   <!-- ************************************* Investment Tracker Start ************************************* -->
-  <!-- <div class="container-lg">
-    <div class='tableauPlaceholder' id='viz1614833538310' style='align-content: center'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;St&#47;StockMarketAnalysis_16148159340840&#47;TrendAnalysis&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='StockMarketAnalysis_16148159340840&#47;TrendAnalysis' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;St&#47;StockMarketAnalysis_16148159340840&#47;TrendAnalysis&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1614833538310');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else { vizElement.style.width='100%';vizElement.style.height='1677px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
-  </div> -->
+  <div class="container-lg">
+    <!-- Sub Section Header -->
+    <div class="row">
+      <!--Start of panel-->
+      <div class="col-md-12">
+          <nav class="navbarsubheader">
+              <h4>Investment Performance</h4>
+          </nav>
+      </div>
+    </div> 
+
+    <!-- *********** Investment Tracker Selection Panel Start ************ -->
+    <div class="row">
+      <div class="col-md-3">
+          <div class="card border-success rounded h-80" id="buttoncard">
+              <div class="card-body" id="card_panel">
+                  <h4 class="card-title" id="cardtitle">Listed Companies</h4>
+                  <hr>
+                  <input type="text" name="ticker_input" id="ticker_input" class="form-control" />
+                  <!-- Tokeninput plugin library -->
+                  <script src="{{ url_for('static', filename='js/jquery.tokeninput.js') }}" defer></script>
+                  <!-- <script src="{{ url_for('static', filename='js/counties.js') }}"></script> -->
+                  <script src="{{ url_for('static', filename='js/tickerZ.js') }}"></script>
+                  <script> var tickers = tickerZ
+                      $(document).ready(function () {
+                          $("#ticker_input").tokenInput(tickers);
+                      });
+                  </script>
+              </div>
+          </div>
+      </div>
+
+      <div class="col-md-3" >
+          <!-- investment amount starts -->
+          <div class="card border-success rounded h-80" id="buttoncard">
+              <div class="card-body">
+                  <h4 class="card-title" id="cardtitle">Amount Invested</h4>
+                  
+                  <!-- <p class="card-text">Investment amount ($)  -->
+                  <hr>
+                  <div class="form-validation">
+                      <form class="form-valide" action="#" method="post">
+                          <div class="form-group row">
+                              <!-- <label class="col-lg-12 col-form-label" for="val-number">
+                          </label> -->
+                              <div class="col-lg-10">
+                                  <input type="text" class="form-control" id="val-number" name="val-number"
+                                      placeholder="1000">
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="col-md-3">
+          <!-- Date picker starts -->
+          <div class="card border-success rounded h-80" id="buttoncard">
+              <div class="card-body">
+                  <h4 class="card-title" id="cardtitle">Investment Period</h4>
+                  <!-- <p class="card-text">Select a period of your investment</p> -->
+                  <hr>
+                  <div class="example">
+                      <input class="form-control input-daterange-datepicker" type="text" name="daterange"
+                          id="daterange" value="02/01/2020 - 01/31/2020"
+                          style="font-size: 70%; text-align: center; max-width: 150%; padding-right: 0;">
+                  </div>
+              </div>
+          </div>
+      </div> <!-- Date picker ends -->
+
+      <div class="col-md-3">
+          <div class="card border-success rounded h-80" id="buttoncard">
+              <div class="card-body">
+                  <h4 class="card-title" id="cardtitle">Analyse your investment</h4>
+                  <!-- <p> Analyse your investment</p> -->
+                  <hr>
+                  <button id="submit" type="submit" class="btn btn-success" style="font-size:75%">Track
+                      Performance</button>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <!-- *********** Investment Tracker Selection Panel End ************ -->
+
+
+  <!-- **************** Investment Tracker Dashboard Start *************** -->
+  <div class="container-lg">
+    <div class="row">
+      <div class="col-lg-3 col-sm-6">
+          <div class="card border-success rounded h-100" id="buttoncard">
+              <div class="stat-widget-two card-body">
+                  <div class="stat-content">
+                      <div class="stat-text" id="cardtitle">Initial Investment</div>
+                      <div class="stat-digit" id="invest-amount"> <i class="fa fa-usd"></i>8500</div>
+                      <p id="investment">Investment Date:</p>
+                  </div>
+                  <div class="progress">
+                      <div class="progress-bar progress-bar-success w-85" role="progressbar"
+                          aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="col-lg-3 col-sm-6">
+          <div class="card border-success rounded h-100" id="buttoncard">
+              <div class="stat-widget-two card-body">
+                  <div class="stat-content">
+                      <div class="stat-text" id="cardtitle">Maximum Possible Return</div>
+                      <div class="stat-digit" id="max-return"> <i class="fa fa-usd"></i>7800</div>
+                      <p id="max-return_date">Divestment Date:</p>
+                  </div>
+                  <div class="progress">
+                      <div class="progress-bar progress-bar-primary w-75" role="progressbar"
+                          aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="col-lg-3 col-sm-6">
+          <div class="card border-success rounded h-100" id="buttoncard">
+              <div class="stat-widget-two card-body">
+                  <div class="stat-content">
+                      <div class="stat-text" id="cardtitle">Minimum Possible Return</div>
+                      <div class="stat-digit" id="min-return"> <i class="fa fa-usd"></i> 500</div>
+                      <p id="min-return_date">Divestment Date:</p>
+                  </div>
+                  <div class="progress">
+                      <div class="progress-bar progress-bar-warning w-50" role="progressbar"
+                          aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="col-lg-3 col-sm-6">
+          <div class="card border-success rounded h-100" id="buttoncard">
+              <div class="stat-widget-two card-body">
+                  <div class="stat-content">
+                      <div class="stat-text" id="cardtitle">Actual Return</div>
+                      <div class="stat-digit" id="act-return"> <i class="fa fa-usd"></i>650</div>
+                      <p id="act-return_date">Divestment Date:</p>
+                  </div>
+                  <div class="progress">
+                      <div class="progress-bar progress-bar-danger w-65" role="progressbar" aria-valuenow="100"
+                          aria-valuemin="-100" aria-valuemax="100"></div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <!-- **************** Investment Tracker Dashboard End *************** -->
   <!-- ***************************** End Investment Tracker Dashboard ***************************************-->
 
 </div>
