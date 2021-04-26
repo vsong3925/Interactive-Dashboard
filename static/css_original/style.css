@@ -1,0 +1,51 @@
+.img-logo {
+    height: 52px;
+    width: 52px;
+}
+
+.navbar {
+    background-color: #222;
+}
+
+#navselect {
+    color: #f3f4ed;
+}
+
+#header {
+    background-color: #025955;
+}
+
+#headline {
+    color: #f3f4ed;
+}
+
+#pagebody {
+    background-color: #f3f4ed;   /* eeebdd beige*/    /*f7f3e9 light beige*/  /*f3f4ed  greg*/
+}
+
+#buttoncard {
+    background-color: #f3f4ed;
+}
+
+#cardtitle {
+    color: #025955;
+}
+
+#cardsubtitle {
+    color: #025955;
+}
+
+.btn {
+    background-color: #00917c;
+    color: #f3f4ed
+}
+
+#description1 {
+    background-color: #00917c;
+    color: #f3f4ed
+}
+
+#description2 {
+    background-color: #00917c;
+    color: #f3f4ed
+}

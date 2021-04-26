@@ -321,8 +321,8 @@ function buildStockPlot(stock1, stock2) {
             autorange: true,
             type: "linear"
             },
-            plot_bgcolor: "#f3f4ed",
-            paper_bgcolor: "#f3f4ed"
+            plot_bgcolor: "#f9f9f9",
+            paper_bgcolor: "#f9f9f9"
         };
 
         var config = {responsive:true}
@@ -411,8 +411,8 @@ function buildStockPlot(stock1, stock2) {
             overlaying: 'y',
             side: 'right'
             },
-            plot_bgcolor: "#f3f4ed",
-            paper_bgcolor: "#f3f4ed"
+            plot_bgcolor: "#f9f9f9",
+            paper_bgcolor: "#f9f9f9"
         };
         
         var config = {responsive:true}

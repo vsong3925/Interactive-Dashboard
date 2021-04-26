@@ -1,213 +1,822 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html lang="zxx"> <!--<![endif]-->
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Stock Market Analysis</title>
-
-  <!-- Bootstrap CSS and JS-->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-
-  <!--CSS-->
-  <link href="{{ url_for('static', filename='./css/style.css')}}" rel="stylesheet">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="description" content="Bingo One page parallax responsive HTML Template ">
   
-  <!-- D3 JS -->
-  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <meta name="author" content="Themefisher.com">
+
+  <title>Stock Dashboard</title>
+
+<!-- Mobile Specific Meta
+  ================================================== -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
 
   <!-- Plotly JS -->
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  <link rel="shortcut icon" type="image/jpg" href="{{ url_for('static', filename='./Images/favicon_big.png')}}" />
+  <link rel="shortcut icon" type="image/jpg" href="{{ url_for('static', filename='./Images/favicon_big.png')}}"/>
+  <!-- ss correlation-->
+  <script src="https://unpkg.com/simple-statistics@5.0.0/dist/simple-statistics.min.js"></script>
 
   <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin=""/>
-  <!-- <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js" integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q==" crossorigin=""></script> -->
 
-  <!-- ss correlation-->
-  <script src="https://unpkg.com/simple-statistics@5.0.0/dist/simple-statistics.min.js"></script>
-  
-  <!-- Daterange picker -->
-  <link href="{{ url_for('static', filename='./vendor/bootstrap-daterangepicker/daterangepicker.css')}}"
-  rel="stylesheet">
-
-  <!-- Ticker Selection -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='./vendor/select2/css/select2.min.css')}}">
-
-  <!--CSS autocomplete-->
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/token-input.css') }}"/>
-
-  <!--jquery autocomplete-->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-  <!-- API key -->
-  <!-- <script type="text/javascript" src="static/js/config.js"></script> -->
-  
   <!-- D3 CDN -->
   <script src="https://d3js.org/d3.v6.min.js"></script>
+  
+  <!-- CSS
+  ================================================== -->
+  <!-- Themefisher Icon font -->
+  <link rel="stylesheet" href="{{url_for('static', filename='./plugins/themefisher-font.v-2/style.css')}}">
+  <!-- bootstrap.min css -->
+  <link rel="stylesheet" href="{{url_for('static', filename='./plugins/bootstrap/dist/css/bootstrap.min.css')}}">
+  <!-- Slick Carousel -->
+  <link rel="stylesheet" href="{{url_for('static', filename='./plugins/slick-carousel/slick/slick.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='./plugins/slick-carousel/slick/slick-theme.css')}}">
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="{{url_for('static', filename='./css/style.css')}}">
 
   <!-- logic.js -->
-  <script src="../static/js/app_stockmarket.js" defer></script>
   <script src="{{ url_for('static', filename='./js/logic.js')}}" defer></script>
+  <script src="{{ url_for('static', filename='./js/script.js')}}" defer></script>
+  
 
 </head>
 
-<body id="pagebody">
-  <!--Start Nav Bar-->  
-  <nav class="navbar navbar-expand-lg">  <!--fixed-top navbar-dark bg-dark-->
-    <a class="navbar-brand" href="#"><img src="{{ url_for('static', filename='Images/favicon_black.png')}}" class="img-logo" alt="Stocks"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-link" id="navselect" href="#">Dashboard<span class="sr-only"></span></a>
-        </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" href=# id="navselect">Track Investment</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" id="navselect">Track Stocks</a>
-        </li> -->
-        <!-- <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Options
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">Income/Expenditures</a>
-            <a class="dropdown-item" href="#">Home Prices</a>
-            <a class="dropdown-item" href="#">Crime Rate</a>
-            <a class="dropdown-item" href="#">School Rating</a>
-            <a class="dropdown-item" href="#">Reviews</a>
-          </div>
-        </li> -->
-      </ul>
-    </div>
-  </nav>
-  <!--End of Nav Bar-->
+<body id="body">
 
-  <!--Page Head and Title-->
-  <div class="jumbotron jumbotron-fluid" id="header">
+ <!--
+  Start Preloader
+  ==================================== -->
+  <div id="preloader">
+    <div class="preloader">
+      <div class="sk-circle1 sk-child"></div>
+      <div class="sk-circle2 sk-child"></div>
+      <div class="sk-circle3 sk-child"></div>
+      <div class="sk-circle4 sk-child"></div>
+      <div class="sk-circle5 sk-child"></div>
+      <div class="sk-circle6 sk-child"></div>
+      <div class="sk-circle7 sk-child"></div>
+      <div class="sk-circle8 sk-child"></div>
+      <div class="sk-circle9 sk-child"></div>
+      <div class="sk-circle10 sk-child"></div>
+      <div class="sk-circle11 sk-child"></div>
+      <div class="sk-circle12 sk-child"></div>
+    </div>
+  </div> 
+  <!--
+  End Preloader
+  ==================================== -->
+
+
+  
+
+<!--
+Fixed Navigation
+==================================== -->
+<section class="top-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="currency-status">
+                    <li>
+                        <a href="#">
+                            <i class="tf-ion-arrow-down-b down-status"></i>
+                            <span>BTC/USD</span>
+                            <span>15046.07</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="tf-arrow-dropup up-status"></i>
+                            <span>ETH/USD</span>
+                            <span >843.0005</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="tf-arrow-dropup up-status"></i>
+                            <span>BCH/USD</span>
+                            <span>2648.1377</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="tf-arrow-dropup up-status"></i>
+                            <span>BTG/USD</span>
+                            <span>278.0000</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="tf-arrow-dropup down-status"></i>
+                            <span>DASH/USD</span>
+                            <span>1131.8100</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="tf-arrow-dropup down-status"></i>
+                            <span>XRP/USD</span>
+                            <span>2.1956</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="tf-arrow-dropup up-status"></i>
+                            <span>ZEC/USD</span>
+                            <span>2.1956</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="header  navigation">
     <div class="container">
-      <h1 class="display-4" id="headline">Stock Tracker</h1>
-      <p class="lead" id="headline">Track your investment and compare any two stock</p>
-    </div>
-  </div>
-  
-  
-  <!-- **********************************  Page Body Start ************************************* -->
-  <!-- Card Start-->
-  <div class="container-lg">
-    <div class="row row-cols-1 row-cols-md-4 g-3">
-      <div class="col">
-        <div class="card rounded border-success" id="buttoncard">  <!--border-light h-100-->
-          <div class="card-body">
-            <h4 class="card-title" id="cardtitle">Sectors</h4>
-            <p class="card-text" id="cardsubtitle">Select Sectors</p>
-            <hr>
-            <select id="sector1" class="btn btn-sm dropdown-toggle"></select>
-          <br>
-          <br>
-          <select id="sector2" class="btn btn-sm dropdown-toggle"></select>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card border-success rounded h-100" id="buttoncard">
-          <div class="card-body">
-            <h4 class="card-title" id="cardtitle">Stocks</h4>
-            <p class="card-text" id="cardsubtitle">Select Stocks</p>
-            <hr>
-            <select id="stock1" class="btn btn-sm dropdown-toggle"></select>  <!--btn-secondary -->
-            <br>
-            <br>
-            <select id="stock2" class="btn btn-sm dropdown-toggle"></select>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card border-success rounded h-100" id="buttoncard">
-          <div class="card-body">
-            <h4 class="card-title" id="cardtitle">Date</h4>
-            <p class="card-text" id="cardsubtitle">Select Dates</p>
-            <hr>
-            <select id="start_date" class="btn btn-sm dropdown-toggle"></select>
-            <br>
-            <br>
-            <select id="end_date" class="btn btn-sm dropdown-toggle"></select>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card border-success rounded h-100" id="buttoncard">
-          <div class="card-body">
-            <button id="submit_plot" type="submit" class="btn">Plot Stock</button>
-            <br>
-            <p id="cardsubtitle"> See Stocks Performance</p>
-            <hr>
-            <p><span id="description1" class="badge rounded"></span></p>  <!--rounded-pill -->
-            <!-- <br>
-            <br> -->
-            <p><span id="description2" class="badge rounded"></span></p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Card End-->
-    <hr>
-  </div>
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="navbar navbar-expand-lg">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="{{url_for('static', filename='./Images/favicon_black.png')}}" style="width:52px; height:52px;"  alt="logo">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="tf-ion-android-menu"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="pricing.html">Buy/Sell</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="faq.html">F.A.Q</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="contact.html">Contact</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="login.html">Sign In</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/signup.html">Sign Up</a>
+                            </li>
 
-    <!--Stock Plot-->
-  <div class="container-lg">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Pages
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="team.html">Team Page</a>
+                                    <a class="dropdown-item" href="404.html">404 Page</a>
+                                    <a class="dropdown-item" href="blog.html">Blog Page</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+ <!--
+Welcome Slider
+==================================== -->
+
+<section class="hero-area">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 align-self-center mb-4 mb-lg-0">
+				<div class="video-player">
+					<img class="img-fluid rounded" src="{{url_for('static', filename='Images/slider/slider-bg-2.jpg')}}" alt="">
+					<a class="play-icon">
+						<i class="tf-ion-ios-play" data-video="https://www.youtube.com/embed/p7HKvqRI_Bo"></i>
+                        <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/p7HKvqRI_Bo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+					</a>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div class="block">
+					<h2>Stock Market Performance - Past Present and Future</h2>
+					<p>Live track stock performance, review the stock market performance over the past 20 years and preview the performance prediction in 2021.</p>
+					<ul class="list-inline">
+						<li class="list-inline-item">
+							<a data-scroll href="#about" class="btn btn-main">Explore Us</a>		
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>	
+
+<!-- <section class="counter section-sm">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-3">
+                <div class="counters-item">
+                    <span>$50B+</span>
+                    <p>Bitcoin Served</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-3">
+                <div class="counters-item">
+                    <span>10M+</span>
+                    <p>Server Build</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-3">
+                <div class="counters-item">
+                    <span>68</span>
+                    <p>Countries Supported</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-3">
+                <div class="counters-item kill-border">
+                    <span>10B</span>
+                    <p>Active Treades</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> -->
+
+<!--
+Start About Section
+==================================== -->
+<section class="about-2 section bg-gray" id="about">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 col-md-6 align-self-center mb-4 mb-md-0">
+                <div class="align-self-center">
+    				<h2>Stock Market Performance Over the Past 20 Years</h2>
+    				<p>Take a close look at the stock market performance for Dow Jones, S&P500 and NASDAQ</p>
+    				<p>Learn more about these index.</p>
+                    <a href="#" class="btn btn-main">Learn More</a>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <!-- <div id="myDiv" class="bitcoin-graph">
+                    <div>
+                        <p>Bitcoin graphs</p>
+                    </div>
+                </div> -->
+                <div class='tableauPlaceholder' id='viz1618680451552' style='position: relative'><noscript><a href='#'><img alt='Overall Trend (2000-2021) ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;St&#47;StockMarketAnalysis_16148159340840&#47;Overall&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='StockMarketAnalysis_16148159340840&#47;Overall' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;St&#47;StockMarketAnalysis_16148159340840&#47;Overall&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1618680451552');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+            </div> 		
+		</div>
+	</div>
+</section>
+
+<section class="services section-xs"  id="services">
+	<div class="container">
+		<div class="row">
+			<!-- Single Service Item -->
+			<div class="col-md-4 col-sm-6 col-xs-12" >
+				<div class="service-block color-bg text-center">
+					<div class="service-icon text-center">
+						<img src="{{url_for('static', filename='Images/icons/bitcoin-safety-shield.png')}}" alt="">
+					</div>
+					<h3>Easy & Secure</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur.. Sed id lorem eget orci dictum facilisis vel id tellus. Nullam iaculis arcu at mauris dapibus consectetur.</p>
+				</div>
+			</div>
+			<!-- End Single Service Item -->
+			
+			<!-- Single Service Item -->
+			<div class="col-md-4 col-sm-6 col-xs-12" >
+				<div class="service-block text-center">
+					<div class="service-icon text-center">
+						<img src="{{url_for('static', filename='Images/icons/bitcoin-exchange.png')}}" alt="">
+					</div>
+					<h3>Instant Exchange</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur.. Sed id lorem eget orci dictum facilisis vel id tellus. Nullam iaculis arcu at mauris dapibus consectetur.</p>
+				</div>
+			</div>
+			<!-- End Single Service Item -->
+			
+			<!-- Single Service Item -->
+			<div class="col-md-4 col-sm-6 col-xs-12 mx-auto"  >
+				<div class="service-block color-bg text-center">
+					<div class="service-icon text-center">
+						<img src="{{url_for('static', filename='Images/icons/bitcoin-network.png')}}" alt="">
+					</div>
+					<h3>Strong Network</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur.. Sed id lorem eget orci dictum facilisis vel id tellus. Nullam iaculis arcu at mauris dapibus consectetur.</p>
+				</div>
+			</div>
+		</div> 		<!-- End row -->
+	</div>   	<!-- End container -->
+</section>   <!-- End section -->
+					
+<!--
+Start About Section
+==================================== -->
+<section class="service-2 section bg-gray">
+  <div class="container">
     <div class="row">
+      <div class="col">
+        <div class="title text-center">
+          <h4>LIVE</h4>
+          <h2>Track Stock</h2>
+          <span class="border"></span>
+          <p>Compare stock performance over time and live track stock performance</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 p-0">
+        <div class="service-item text-center">
+            <!-- <span class="count">1.</span> -->
+            <h4>Sectors</h4>  <!--style="color:#31BB9E"-->
+            <p>Select two sectors</p>
+            <select id="sector1" class="btn btn-sm dropdown-toggle" style="background-color:#31BB9E; color:#fff"></select>
+            <br>
+            <br>
+          <select id="sector2" class="btn btn-sm dropdown-toggle" style="background-color:#31BB9E; color:#fff"></select>
+        </div>
+      </div>
+      <div class="col-md-3 p-0">
+        <div class="service-item text-center">
+          <!-- <span class="count">2.</span> -->
+          <h4>Stock</h4>
+          <p>Select two stock</p>
+          <select id="stock1" class="btn btn-sm dropdown-toggle" style="background-color:#31BB9E; color:#fff"></select>
+            <br>
+            <br>
+          <select id="stock2" class="btn btn-sm dropdown-toggle" style="background-color:#31BB9E; color:#fff"></select>
+        </div>
+      </div>
+      <div class="col-md-3 p-0">
+        <div class="service-item text-center">
+          <!-- <span class="count">3.</span> -->
+          <h4>Date</h4>
+          <p>Select start date and end date</p>
+          <select id="start_date" class="btn btn-sm dropdown-toggle" style="background-color:#31BB9E; color:#fff"></select>
+            <br>
+            <br>
+          <select id="end_date" class="btn btn-sm dropdown-toggle" style="background-color:#31BB9E; color:#fff"></select>
+        </div>
+      </div>
+      <div class="col-md-3 p-0">
+        <div class="service-item text-center">
+          <!-- <span class="count">4.</span> -->
+          <h4>Plot</h4>
+          <p>Track stock performance</p>
+          <br>
+          <button id="submit_plot" type="submit" class="btn" style="background-color:#31BB9E; color:#fff">Plot Stock</button>
+          <br>
+          <br>
+          <!-- <p><span id="description1" class="badge rounded"></span></p>
+          <p><span id="description2" class="badge rounded"></span></p> -->
+        </div>
+      </div>
+    </div>    <!-- End row -->
+  </div>    <!-- End container -->
+
+  <div class="container">   <!--Stock Plot-->
+    <br>
+    <p><span id="description1" class="badge rounded"></span></p>
+    <p><span id="description2" class="badge rounded"></span></p>
+    <br>   
+  </div>
+  <div class="container">
+    <div class="row" style="width:1100px; height:500px">
       <div class="col-md-6" id="correPlot"></div>
       <div class="col-md-6" id="comparisonPlot"></div>
     </div>
-    <br>
+  </div>
+</section>   <!-- End section -->
 
-      <!-- Tableau Card-->
-      <!-- <div class="card text-center border-light rounded">
-        <div class="card-body">
-          <div class='tableauPlaceholder' id='viz1614833538310' style='align-content: center'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;St&#47;StockMarketAnalysis_16148159340840&#47;TrendAnalysis&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='StockMarketAnalysis_16148159340840&#47;TrendAnalysis' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;St&#47;StockMarketAnalysis_16148159340840&#47;TrendAnalysis&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1614833538310');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else { vizElement.style.width='100%';vizElement.style.height='1677px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+
+<section class="services section-xs"  id="services">
+	<div class="container">
+		<div class="row">
+			<!-- Single Service Item -->
+			<div class="col-md-4 col-sm-6 col-xs-12" >
+				<div class="service-block color-bg text-center">
+					<div class="service-icon text-center">
+						<img src="{{url_for('static', filename='Images/icons/bitcoin-safety-shield.png')}}" alt="">
+					</div>
+					<h3>Easy & Secure</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur.. Sed id lorem eget orci dictum facilisis vel id tellus. Nullam iaculis arcu at mauris dapibus consectetur.</p>
+				</div>
+			</div>
+			<!-- End Single Service Item -->
+			
+			<!-- Single Service Item -->
+			<div class="col-md-4 col-sm-6 col-xs-12" >
+				<div class="service-block text-center">
+					<div class="service-icon text-center">
+						<img src="{{url_for('static', filename='Images/icons/bitcoin-exchange.png')}}" alt="">
+					</div>
+					<h3>Instant Exchange</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur.. Sed id lorem eget orci dictum facilisis vel id tellus. Nullam iaculis arcu at mauris dapibus consectetur.</p>
+				</div>
+			</div>
+			<!-- End Single Service Item -->
+			
+			<!-- Single Service Item -->
+			<div class="col-md-4 col-sm-6 col-xs-12 mx-auto"  >
+				<div class="service-block color-bg text-center">
+					<div class="service-icon text-center">
+						<img src="{{url_for('static', filename='Images/icons/bitcoin-network.png')}}" alt="">
+					</div>
+					<h3>Strong Network</h3>
+					<p>Lorem ipsum dolor sit amet, consectetur.. Sed id lorem eget orci dictum facilisis vel id tellus. Nullam iaculis arcu at mauris dapibus consectetur.</p>
+				</div>
+			</div>
+		</div> 		<!-- End row -->
+	</div>   	<!-- End container -->
+</section>   <!-- End section -->
+
+
+<!--
+Start Call To Action
+==================================== -->
+<!-- <section class="call-to-action section-sm">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<h2>Open account for free and start trading Bitcoins now!</h2>
+				<p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicudin bibendum auctor, <br> nisi elit consequat ipsum, nesagittis sem nid elit. Duis sed odio sitain elit.</p>
+				<a href="" class="btn btn-main">Get Started</a>
+			</div>
+		</div> 		
+	</div>   	
+</section>    -->
+
+<!-- Predicition Section -->
+<section class="about-2 section bg-gray" id="about">
+	<div class="container">
+		<div class="row">
+            <div class="col-12 col-md-6">
+                <div class='tableauPlaceholder' id='viz1618681657078' style='position: relative'><noscript><a href='#'><img alt='Stock Market Overall Trend - Dow Jones ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;St&#47;StockMarketPrediction_16157795216330&#47;Trend&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='StockMarketPrediction_16157795216330&#47;Trend' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;St&#47;StockMarketPrediction_16157795216330&#47;Trend&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1618681657078');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+            </div>
+            <div class="col-12 col-md-6 align-self-center mb-4 mb-md-0">
+                <div class="align-self-center">
+                    <h2>Stock Market Performance Prediction</h2>
+                    <p>Take a close look at the stock market performance for Dow Jones, S&P500 and NASDAQ</p>
+                    <p>Learn more about these index.</p>
+                    <a href="#" class="btn btn-main">Learn More</a>
+                </div>
+            </div>
+      </div>
+      <br>
+      <br>
+      <div class="row">
+        <h3>Prediction for Major Historical Events</h3>
+        <br>
+      </div>
+      <div class="row">
+        <!-- <div class="col-12 col-md-4">
+          <div class='tableauPlaceholder' id='viz1618862136995' style='position: relative'><noscript><a href='#'><img alt='Global Slowdown Fear Prediction - S&amp;P500 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;St&#47;StockMarketPrediction_16157795216330&#47;GlobalSlowdownPredictionSP&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='StockMarketPrediction_16157795216330&#47;GlobalSlowdownPredictionSP' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;St&#47;StockMarketPrediction_16157795216330&#47;GlobalSlowdownPredictionSP&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1618862136995');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+        </div> -->
+        <div class="col-12 col-md-6">
+          <div class='tableauPlaceholder' id='viz1618861988177' style='position: relative'><noscript><a href='#'><img alt='Financial Crisis Decline Prediction - Dow Jones ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;St&#47;StockMarketPrediction_16157795216330&#47;CrisisRecoveryPredict&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='StockMarketPrediction_16157795216330&#47;CrisisRecoveryPredict' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;St&#47;StockMarketPrediction_16157795216330&#47;CrisisRecoveryPredict&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1618861988177');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class='tableauPlaceholder' id='viz1618861947553' style='position: relative'><noscript><a href='#'><img alt='Covid-19 Pandemic Prediction - Dow Jones ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;St&#47;StockMarketPrediction_16157795216330&#47;CovidPredict&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='StockMarketPrediction_16157795216330&#47;CovidPredict' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;St&#47;StockMarketPrediction_16157795216330&#47;CovidPredict&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1618861947553');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
         </div>
       </div>
-      <hr> -->
+	</div>
+</section>
 
-      <!--Predicition Tableau Plot-->
-      <!-- <div class="card text-center border-light rounded">
-        <div class="card-body">
-          <div class='tableauPlaceholder' id='viz1615781706053' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;St&#47;StockMarketPrediction_16157795216330&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='StockMarketPrediction_16157795216330&#47;Dashboard1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;St&#47;StockMarketPrediction_16157795216330&#47;Dashboard1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1615781706053');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else { vizElement.style.width='100%';vizElement.style.height='1577px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+<!-- Start Testimonial
+=========================================== -->
+		
+	<section class="testimonial section" id="testimonial">
+		<div class="container">
+      <div class="col-12 col-md-12 align-self-center mb-4 mb-md-0">
+        <div class="align-self-center">
+            <h2 style="color: #fff">Heard on the Street</h2>
+            <p style="color: #fff">Follow the news on Twitter about the recent stock market performance.</p>
+            <!-- <p>Learn more about these index.</p>
+            <a href="#" class="btn btn-main">Learn More</a> -->
         </div>
-      </div> -->
+      </div>
+			<div class="row">				
+				<div class="col-lg-12">
+					<!-- testimonial wrapper -->
+					<div class="testimonial-slider">
+						<!-- testimonial single -->
+						<div class="item">
+                            <div class="block" style="background-color:#31BB9E">
+    							<!-- client info -->
+    							<div class="client-details">
+    								<!-- <p>twitter</p> -->
+                    <!-- <blockquote class="twitter-tweet"><p lang="en" dir="ltr">The housing market heats up every spring, but this year is different. <br><br>So many people are offering all cash to buy homes that those who need mortgages are skipping inspections and appraisals. <br><br>🧵 Here&#39;s why that can be risky: <a href="https://t.co/SeQ95fry5C">https://t.co/SeQ95fry5C</a></p>&mdash; MarketWatch (@MarketWatch) <a href="https://twitter.com/MarketWatch/status/1383101978088210440?ref_src=twsrc%5Etfw">April 16, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
+                    <a class="twitter-timeline" data-height="500" href="https://twitter.com/MarketWatch?ref_src=twsrc%5Etfw">Tweets by MarketWatch</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    							</div>
+    							<!-- /client info -->
+    							<!-- client photo -->
+                                <!-- <div class="media client-meta">
+                                  <img class="mr-3 client-thumb" src="images/client-logo/clients-1.jpg" alt="Generic placeholder image">
+                                  <div class="media-body">
+                                    <h4 class="mt-0">Matt Cutts</h4>
+                                    <p>CEO, Themefisher</p>
+                                  </div>
+                                </div> -->
+    							
+    							<!-- /client photo -->
+                            </div>
+						</div>
+						<!-- /testimonial single -->
+                        <!-- testimonial single -->
+                        <div class="item">
+                            <div class="block" style="background-color:#31BB9E">
+                                <!-- client info -->
+                                <div class="client-details">
+                                    <!-- <p>Twitter Post 2</p> -->
+                                    <!-- <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Heard on the Street: First-quarter profits are delivering the largest positive surprises in sectors such as banking and retail, but those stocks aren’t doing particularly well <a href="https://t.co/j0zkg1lr6C">https://t.co/j0zkg1lr6C</a></p>&mdash; WSJ Markets (@WSJmarkets) <a href="https://twitter.com/WSJmarkets/status/1384199904667463682?ref_src=twsrc%5Etfw">April 19, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
+                                    <a class="twitter-timeline" data-height="500" href="https://twitter.com/WSJmarkets?ref_src=twsrc%5Etfw">Tweets by WSJmarkets</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                                </div>
+                                <!-- /client info -->
+                                <!-- client photo -->
+                                <!-- <div class="media client-meta">
+                                  <img class="mr-3 client-thumb" src="images/client-logo/clients-1.jpg" alt="Generic placeholder image">
+                                  <div class="media-body">
+                                    <h4 class="mt-0">Matt Cutts</h4>
+                                    <p>CEO, Themefisher</p>
+                                  </div>
+                                </div> -->
+                                
+                                <!-- /client photo -->
+                            </div>
+                        </div>
+                        <!-- /testimonial single -->
+                        <!-- testimonial single -->
+                        <div class="item">
+                            <div class="block" style="background-color:#31BB9E">
+                                <!-- client info -->
+                                <div class="client-details">
+                                    <!-- <p>Twitter Post 3</p> -->
+                                    <!-- <blockquote class="twitter-tweet"><p lang="en" dir="ltr">📕 PORTFOLIO ALLOCATION<br><br>If you&#39;re a beginner in the stocks markets, allocate your funds as below;<br><br>📜 Direct Stocks : 25%<br><br>🏦 Mutual Funds : 30%<br><br>💰 Index ETFs : 45%<br><br>This will help you to maximize returns without taking undue risks.<br><br>Skills Required: Patience &amp; Discipline <a href="https://t.co/I7E9tMSE7m">pic.twitter.com/I7E9tMSE7m</a></p>&mdash; StockTalk (@stocktalk_in) <a href="https://twitter.com/stocktalk_in/status/1261666895687606273?ref_src=twsrc%5Etfw">May 16, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
+                                    <a class="twitter-timeline" data-height="500" href="https://twitter.com/stocktalk_in?ref_src=twsrc%5Etfw">Tweets by stocktalk_in</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                                </div>
+                                <!-- /client info -->
+                                <!-- client photo -->
+                                <!-- <div class="media client-meta">
+                                  <img class="mr-3 client-thumb" src="images/client-logo/clients-1.jpg" alt="Generic placeholder image">
+                                  <div class="media-body">
+                                    <h4 class="mt-0">Matt Cutts</h4>
+                                    <p>CEO, Themefisher</p>
+                                  </div>
+                                </div> -->
+                                
+                                <!-- /client photo -->
+                            </div>
+                        </div>
+                        <!-- /testimonial single -->
+                        <!-- testimonial single -->
+                        <div class="item">
+                            <div class="block" style="background-color:#31BB9E">
+                                <!-- client info -->
+                                <div class="client-details">
+                                    <!-- <p>Twitter Post 4</p> -->
+                                    <a class="twitter-timeline" data-height="500" href="https://twitter.com/YahooFinance?ref_src=twsrc%5Etfw">Tweets by YahooFinance</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                                  </div>
+                                <!-- /client info -->
+                                <!-- client photo -->
+                                <!-- <div class="media client-meta">
+                                  <img class="mr-3 client-thumb" src="images/client-logo/clients-1.jpg" alt="Generic placeholder image">
+                                  <div class="media-body">
+                                    <h4 class="mt-0">Matt Cutts</h4>
+                                    <p>CEO, Themefisher</p>
+                                  </div>
+                                </div> -->
+                                
+                                <!-- /client photo -->
+                            </div>
+                        </div>
+                        <!-- /testimonial single -->
+                        <!-- testimonial single -->
+                        <div class="item">
+                            <div class="block" style="background-color:#31BB9E">
+                                <!-- client info -->
+                                <div class="client-details">
+                                  <!-- <blockquote class="twitter-tweet"><p lang="en" dir="ltr">S&amp;P 500 declined 📉 0.5% on Monday, the most in over three weeks <a href="https://t.co/2sqGg2cCwz">https://t.co/2sqGg2cCwz</a> <a href="https://t.co/b2c08fqSU9">pic.twitter.com/b2c08fqSU9</a></p>&mdash; Bloomberg Markets (@markets) <a href="https://twitter.com/markets/status/1384236312752840707?ref_src=twsrc%5Etfw">April 19, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
+                                  <a class="twitter-timeline" data-height="500" href="https://twitter.com/markets?ref_src=twsrc%5Etfw">Tweets by markets</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                                </div>
+                                <!-- /client info -->
+                                <!-- client photo -->
+                                <!-- <div class="media client-meta">
+                                  <img class="mr-3 client-thumb" src="images/client-logo/clients-1.jpg" alt="Generic placeholder image">
+                                  <div class="media-body">
+                                    <h4 class="mt-0">Matt Cutts</h4>
+                                    <p>CEO, Themefisher</p>
+                                  </div>
+                                </div> -->
+                                
+                                <!-- /client photo -->
+                            </div>
+                        </div>
+                        <!-- /testimonial single -->
+					</div>
+				</div> 		<!-- end col lg 12 -->
+			</div>	    <!-- End row -->
+		</div>       <!-- End container -->
+	</section>    <!-- End Section -->
+
+<!--
+Start Blog Section
+=========================================== -->
+<section class="blog section" id="blog">
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<div class="title text-center">
+					<h4>Untold Story</h4>
+					<h2>About Me</h2>
+					<span class="border"></span>
+					<p>Please take a look at my experience, projects and portfolios.</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<!-- single blog post -->
+			<article class="col-12 col-md-6" >
+				<div class="post-item">
+					<div class="post-thumb">
+					  	<img class="img-fluid shadow rounded" src="{{url_for('static', filename='Images/blog/author.JPG')}}" style="width:40%; height:40%" alt="Generic placeholder image">
+					</div>
+			  		<div class="post-title">
+				    	<h3 class="mt-0"><a href="">Zenan Vera Song</a></h3>
+			  		</div>
+			  		<div class="post-meta">
+			  			<span>Email:</span> <a href="" class="">vsong3925@gmail.com</a>
+              <br>
+              <span>GitHub:</span> <a href="https://github.com/vsong3925" class="">github.com/vsong3925</a>
+              <br>
+              <span>LinkedIn:</span> <a href="https://www.linkedin.com/in/zenanverasong/" class="">/in/zenanverasong/</a>
+			  		</div>
+			  		<div class="post-content">
+					    <p>Data analyst, with a background in education, strives to analyze data and use data visualization to inform and enable decision makers with concrete and data-driven action plans. Adept at working independently as well as collaborating with teams across multiple functions. Able to grasp abstract concepts and master new skills quickly. Able to dive deep into projects and take initiative independently. A reflective learner with critical thinking and problem-solving skills.</p>
+			  		</div>
+				    <a class="btn btn-main" href="https://docs.google.com/document/d/1QFlIUs5jUSLFSy2KjPTQlyGYrPuwWouCBLpx9NP-83E/edit?usp=sharing">Read more</a>
+				</div>
+			</article>
+			<!-- /single blog post -->
+			
+			<!-- single blog post -->
+				<article class="col-12 col-md-6" >
+					<div class="post-item">
+						<div class="post-thumb">
+						  	<img class="img-fluid shadow rounded" src="{{url_for('static', filename='Images/blog/leafletmap.png')}}" style="width:40%; height:40%" alt="Generic placeholder image">
+						</div>
+				  		<div class="post-title">
+					    	<h3 class="mt-0"><a href="">Leaftlet Map for USGS</a></h3>
+				  		</div>
+				  		<div class="post-meta">
+				  			<ul class="list-inline">
+				  				<li class="list-inline-item">
+				  					<span>By</span> <a href="" class="">Zenan Vera Song</a>
+				  				</li>
+				  				<li class="list-inline-item">
+				  					<span>By</span> <span> April 15th, 2021</span>
+                    <br>
+				  				</li>
+                  <li class="list-inline-item">
+                    <span>GitHub:</span> <a href="https://github.com/vsong3925/leafletmap" class="">github.com/vsong3925/leafletmap</a>
+                    <br>	
+                    <span>Visualization: </span> <a href="https://earthquakevizmap.herokuapp.com/" class="">earthquakevizmap.herokuapp.com/</a>		
+				  				</li>
+							</ul>
+				  		</div>
+				  		<div class="post-content">
+						    <p>This project used Leaflet to visualize earthquake data retrieved from the United State Geological Survey (USGS) GeoJSON Feed. The map displays the earthquake's magnitudes, size and depth. It also provides more information (time and location) and another map layer to illustrate the relationship between tectonic plates and seismic activity. Users can select different layers for visualization. Click READ MORE to see more details and other projects.</p>
+				  		</div>
+					    <a class="btn btn-main" href="#">Read more</a>
+					</div>
+				</article>
+			<!-- end single blog post -->
+			
+		</div> <!-- end row -->
+	</div> <!-- end container -->
+</section> <!-- end section -->
+				
+
+<!--
+Start Call To Action
+==================================== -->
+<section class="call-to-action section-sm">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<h2>Let's Connect! Please reach out via</h2>
+				<p>Email: vsong3925@gmail.com<br>Github: github.com/vsong3925<br>LinkedIn: /in/zenanverasong/</p>
+				<a href="https://docs.google.com/document/d/1QFlIUs5jUSLFSy2KjPTQlyGYrPuwWouCBLpx9NP-83E/edit?usp=sharing" class="btn btn-main">Read Resume</a>
+			</div>
+		</div> 		<!-- End row -->
+	</div>   	<!-- End container -->
+</section>   <!-- End section -->
+
+<footer id="footer" class="bg-one">
+  <div class="top-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3 col-md-3 col-lg-3">
+          <h3>INFORMATION</h3>
+          <ul>
+            <li><a href="https://docs.google.com/document/d/1QFlIUs5jUSLFSy2KjPTQlyGYrPuwWouCBLpx9NP-83E/edit?usp=sharing">Projects & Portfolio</a></li>
+            <li><a href="https://docs.google.com/document/d/1QFlIUs5jUSLFSy2KjPTQlyGYrPuwWouCBLpx9NP-83E/edit?usp=sharing">Working Experience</a></li>
+            <li><a href="https://docs.google.com/document/d/1QFlIUs5jUSLFSy2KjPTQlyGYrPuwWouCBLpx9NP-83E/edit?usp=sharing">Education</a></li>
+            <li><a href="https://docs.google.com/document/d/1QFlIUs5jUSLFSy2KjPTQlyGYrPuwWouCBLpx9NP-83E/edit?usp=sharing">Skills</a></li>
+          </ul>
+        </div>
+        <!-- End of .col-sm-3 -->
+
+        <div class="col-sm-3 col-md-3 col-lg-3">
+          <h3>Projects</h3>
+          <ul>
+            <li><a href="https://github.com/vsong3925/excel-challenge">Advanced Excel</a></li>
+            <li><a href="https://github.com/vsong3925/leafletmap">Leaflet Map</a></li>
+            <li><a href="https://github.com/vsong3925/tableau-challenge">Tableau Dashboards</a></li>
+            <li><a href="https://github.com/vsong3925/ETL-project">ETL Data Engineering</a></li>
+          </ul>
+        </div>
+        <!-- End of .col-sm-3 -->
+
+        <div class="col-sm-3 col-md-3 col-lg-3">
+          <h3>Tech Skills</h3>
+          <ul>
+            <li><a href="#">Python</a></li>
+            <li><a href="#">Javascript</a></li>
+            <li><a href="#">Plotly</a></li>
+            <li><a href="#">Tableau</a></li>
+          </ul>
+        </div>
+        <!-- End of .col-sm-3 -->
+
+        <div class="col-sm-3 col-md-3 col-lg-3">
+          <h3>Follow Me</h3>
+          <ul>
+              <li>
+                  <a href="https://github.com/vsong3925">
+                      Github
+                  </a>
+              </li>
+              <li>
+                  <a href="https://www.linkedin.com/in/zenanverasong/">
+                      LinkedIn
+                  </a>
+              </li>
+              <li>
+                  <a href="vsong3925@gmail.com">
+                      Email
+                  </a>
+              </li>
+              <!-- <li>
+                  <a href="">
+                      Google PLus
+                  </a>
+              </li> -->
+          </ul>
+        </div>
+        <!-- End of .col-sm-3 -->
+
+      </div>
+    </div> <!-- end container -->
   </div>
-  <!-- ************************************* End of Stock Market Dashboard ************************************* -->
-
-  <!-- ************************************* Investment Tracker Start ************************************* -->
-  <!-- <div class="container-lg">
-    <div class='tableauPlaceholder' id='viz1614833538310' style='align-content: center'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;St&#47;StockMarketAnalysis_16148159340840&#47;TrendAnalysis&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='StockMarketAnalysis_16148159340840&#47;TrendAnalysis' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;St&#47;StockMarketAnalysis_16148159340840&#47;TrendAnalysis&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1614833538310');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else { vizElement.style.width='100%';vizElement.style.height='1677px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
-  </div> -->
-  <!-- ***************************** End Investment Tracker Dashboard ***************************************-->
-
-</div>
+  <div class="footer-bottom">
+    <h5>Copyright 2017. All rights reserved.</h5>
+    <h6>Design and Developed by <a href="">Themefisher</a></h6>
+  </div>
+</footer> <!-- end footer -->
 
 
-<script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
-    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
-    crossorigin=""></script>
+    <!-- end Footer Area
+    ========================================== -->
 
 
-<!-- Leaflet-Choropleth JavaScript -->
-<script type="text/javascript" src="static/js/choropleth.js"></script>
+    
+    <!-- 
+    Essential Scripts
+    =====================================-->
+    
+    <!-- Main jQuery -->
+    <script src="{{url_for('static', filename='./plugins/jquery/dist/jquery.min.js')}}"></script>
+    <!-- Bootstrap -->
+    <script src="{{url_for('static', filename='./plugins/bootstrap/dist/js/popper.min.js')}}"></script>
+    <script src="{{url_for('static', filename='./plugins/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+    <!-- Owl Carousel -->
+    <script src="{{url_for('static', filename='./plugins/slick-carousel/slick/slick.min.js')}}"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- Smooth Scroll js -->
+    <script src="{{url_for('static', filename='./plugins/smooth-scroll/dist/js/smooth-scroll.min.js')}}"></script>
+    
+    <!-- Custom js -->
+    <!-- <script src="js/script.js"></script> -->
+    <script src="{{ url_for('static', filename='./js/script.js')}}"></script>
 
-  <!-- Optional JavaScript; choose one of the two! -->
-
-  <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-
-
-</body>
-
-</html>
+  </body>
+  </html>
