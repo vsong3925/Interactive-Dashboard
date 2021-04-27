@@ -86,51 +86,44 @@ Fixed Navigation
                 <ul class="currency-status">
                     <li>
                         <a href="#">
-                            <i class="tf-ion-arrow-down-b down-status"></i>
-                            <span>BTC/USD</span>
-                            <span>15046.07</span>
+                            <span>DJIA</span>
+                            <span>34065.90</span>
+                            <i class="tf-ion-arrow-down-b down-status">0.06%</i>
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <i class="tf-arrow-dropup up-status"></i>
-                            <span>ETH/USD</span>
-                            <span >843.0005</span>
+                            <span>S&P 500</span>
+                            <span >4188.58</span>
+                            <i class="tf-arrow-dropup up-status">0.21%</i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"> 
+                            <span>Nasdaq</span>
+                            <span>14100.65</span>
+                            <i class="tf-arrow-dropup up-status">0.60%</i>
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <i class="tf-arrow-dropup up-status"></i>
-                            <span>BCH/USD</span>
-                            <span>2648.1377</span>
+                            <span>U.S.10 Yr</span>
+                            <span>-23/32 Yield</span>
+                            <i class="tf-arrow-dropup up-status">1.569%</i>
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <i class="tf-arrow-dropup up-status"></i>
-                            <span>BTG/USD</span>
-                            <span>278.0000</span>
+                            <span>Crude Oil</span>
+                            <span>62.07</span>
+                            <i class="tf-arrow-dropup down-status">0.11%</i>
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <i class="tf-arrow-dropup down-status"></i>
-                            <span>DASH/USD</span>
-                            <span>1131.8100</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="tf-arrow-dropup down-status"></i>
-                            <span>XRP/USD</span>
-                            <span>2.1956</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="tf-arrow-dropup up-status"></i>
-                            <span>ZEC/USD</span>
-                            <span>2.1956</span>
+                            <span>Euro</span>
+                            <span>1.2087</span>
+                            <i class="tf-arrow-dropup down-status">0.09%</i>
                         </a>
                     </li>
                 </ul>
@@ -144,40 +137,43 @@ Fixed Navigation
             <div class="col-md-12">
                 <nav class="navbar navbar-expand-lg">
                     <a class="navbar-brand" href="index.html">
-                        <img src="{{url_for('static', filename='./Images/favicon_black.png')}}" style="width:52px; height:52px;"  alt="logo">
+                        <!-- <img src="{{url_for('static', filename='./Images/logo2.jpeg')}}" style="width:10%; height:10%;"  alt="logo"> -->
+                        <a class="navbar-brand" style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;" href="#">StockBoard</a>
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="tf-ion-android-menu"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
+                          <!-- <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                          </li> -->
                             <li class="nav-item active">
-                                <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="/">Dashboard<span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="pricing.html">Buy/Sell</a>
+                                <a class="nav-link" href="#performance">Performance</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="faq.html">F.A.Q</a>
+                                <a class="nav-link" href="#trackstock">Track Stock</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="contact.html">Contact</a>
+                                <a class="nav-link" href="#prediction">Prediction</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="login.html">Sign In</a>
+                                <a class="nav-link" href="#heardonthestreet">Heard on the Street</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/signup.html">Sign Up</a>
-                            </li>
-
+                            <!-- <li class="nav-item">
+                                <a class="nav-link" href="/signup.html">About Me</a>
+                            </li> -->
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Pages
+                                <a class="nav-link dropdown-toggle" href="#aboutme" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    About Me
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="team.html">Team Page</a>
-                                    <a class="dropdown-item" href="404.html">404 Page</a>
-                                    <a class="dropdown-item" href="blog.html">Blog Page</a>
+                                    <a class="dropdown-item" href="https://docs.google.com/document/d/1QFlIUs5jUSLFSy2KjPTQlyGYrPuwWouCBLpx9NP-83E/edit?usp=sharing">Resume</a>
+                                    <a class="dropdown-item" href="https://github.com/vsong3925">GitHub</a>
+                                    <a class="dropdown-item" href="https://www.linkedin.com/in/zenanverasong/">LinkedIn</a>
                                 </div>
                             </li>
                         </ul>
@@ -201,7 +197,6 @@ Welcome Slider
 					<img class="img-fluid rounded" src="{{url_for('static', filename='Images/slider/slider-bg-2.jpg')}}" alt="">
 					<a class="play-icon">
 						<i class="tf-ion-ios-play" data-video="https://www.youtube.com/embed/p7HKvqRI_Bo"></i>
-                        <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/p7HKvqRI_Bo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
 					</a>
 				</div>
 			</div>
@@ -211,7 +206,7 @@ Welcome Slider
 					<p>Live track stock performance, review the stock market performance over the past 20 years and preview the performance prediction in 2021.</p>
 					<ul class="list-inline">
 						<li class="list-inline-item">
-							<a data-scroll href="#about" class="btn btn-main">Explore Us</a>		
+							<a data-scroll href="#performance" class="btn btn-main">Explore Us</a>		
 						</li>
 					</ul>
 				</div>
@@ -220,41 +215,10 @@ Welcome Slider
 	</div>
 </section>	
 
-<!-- <section class="counter section-sm">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3 col-3">
-                <div class="counters-item">
-                    <span>$50B+</span>
-                    <p>Bitcoin Served</p>
-                </div>
-            </div>
-            <div class="col-md-3 col-3">
-                <div class="counters-item">
-                    <span>10M+</span>
-                    <p>Server Build</p>
-                </div>
-            </div>
-            <div class="col-md-3 col-3">
-                <div class="counters-item">
-                    <span>68</span>
-                    <p>Countries Supported</p>
-                </div>
-            </div>
-            <div class="col-md-3 col-3">
-                <div class="counters-item kill-border">
-                    <span>10B</span>
-                    <p>Active Treades</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> -->
-
 <!--
 Start About Section
 ==================================== -->
-<section class="about-2 section bg-gray" id="about">
+<section class="about-2 section bg-gray" id="performance">
 	<div class="container">
 		<div class="row">
 			<div class="col-12 col-md-6 align-self-center mb-4 mb-md-0">
@@ -284,10 +248,10 @@ Start About Section
 			<div class="col-md-4 col-sm-6 col-xs-12" >
 				<div class="service-block color-bg text-center">
 					<div class="service-icon text-center">
-						<img src="{{url_for('static', filename='Images/icons/bitcoin-safety-shield.png')}}" alt="">
+						<img src="{{url_for('static', filename='Images/icons/icon3.png')}}" style="height:20%; width:20%" alt="">
 					</div>
-					<h3>Easy & Secure</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur.. Sed id lorem eget orci dictum facilisis vel id tellus. Nullam iaculis arcu at mauris dapibus consectetur.</p>
+					<h3>Jim Rogers</h3>
+					<p>"Bottoms in the investment world don't end with four-year lows; they end with 10- or 15-year lows."</p>
 				</div>
 			</div>
 			<!-- End Single Service Item -->
@@ -296,10 +260,10 @@ Start About Section
 			<div class="col-md-4 col-sm-6 col-xs-12" >
 				<div class="service-block text-center">
 					<div class="service-icon text-center">
-						<img src="{{url_for('static', filename='Images/icons/bitcoin-exchange.png')}}" alt="">
+						<img src="{{url_for('static', filename='Images/icons/icon1.png')}}" style="height:20%; width:20%" alt="">
 					</div>
-					<h3>Instant Exchange</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur.. Sed id lorem eget orci dictum facilisis vel id tellus. Nullam iaculis arcu at mauris dapibus consectetur.</p>
+					<h3>Warren Buffett</h3>
+					<p>"I will tell you how to become rich. Close the doors. Be fearful when others are greedy. Be greedy when others are fearful."</p>
 				</div>
 			</div>
 			<!-- End Single Service Item -->
@@ -308,10 +272,10 @@ Start About Section
 			<div class="col-md-4 col-sm-6 col-xs-12 mx-auto"  >
 				<div class="service-block color-bg text-center">
 					<div class="service-icon text-center">
-						<img src="{{url_for('static', filename='Images/icons/bitcoin-network.png')}}" alt="">
+						<img src="{{url_for('static', filename='Images/icons/moneyarrow.png')}}" style="height:20%; width:20%" alt="">
 					</div>
-					<h3>Strong Network</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur.. Sed id lorem eget orci dictum facilisis vel id tellus. Nullam iaculis arcu at mauris dapibus consectetur.</p>
+					<h3>Benjamin Franklin</h3>
+					<p>"An investment in knowledge pays the best interest."</p>
 				</div>
 			</div>
 		</div> 		<!-- End row -->
@@ -321,7 +285,7 @@ Start About Section
 <!--
 Start About Section
 ==================================== -->
-<section class="service-2 section bg-gray">
+<section class="service-2 section bg-gray" id="trackstock">
   <div class="container">
     <div class="row">
       <div class="col">
@@ -405,10 +369,10 @@ Start About Section
 			<div class="col-md-4 col-sm-6 col-xs-12" >
 				<div class="service-block color-bg text-center">
 					<div class="service-icon text-center">
-						<img src="{{url_for('static', filename='Images/icons/bitcoin-safety-shield.png')}}" alt="">
+						<img src="{{url_for('static', filename='Images/icons/icon1.png')}}" style="height:20%; width:20%" alt="">
 					</div>
-					<h3>Easy & Secure</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur.. Sed id lorem eget orci dictum facilisis vel id tellus. Nullam iaculis arcu at mauris dapibus consectetur.</p>
+					<h3>Carlos Slim Helu</h3>
+					<p>"With a good perspective on history, we can have a better understanding of the past and present, and thus a clear vision of the future."</p>
 				</div>
 			</div>
 			<!-- End Single Service Item -->
@@ -417,10 +381,10 @@ Start About Section
 			<div class="col-md-4 col-sm-6 col-xs-12" >
 				<div class="service-block text-center">
 					<div class="service-icon text-center">
-						<img src="{{url_for('static', filename='Images/icons/bitcoin-exchange.png')}}" alt="">
+						<img src="{{url_for('static', filename='Images/icons/icon2.png')}}" style="height:20%; width:20%" alt="">
 					</div>
-					<h3>Instant Exchange</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur.. Sed id lorem eget orci dictum facilisis vel id tellus. Nullam iaculis arcu at mauris dapibus consectetur.</p>
+					<h3>John Bogle</h3>
+					<p>"Don't look for the needle in the haystack. Just buy the haystack!"</p>
 				</div>
 			</div>
 			<!-- End Single Service Item -->
@@ -429,34 +393,18 @@ Start About Section
 			<div class="col-md-4 col-sm-6 col-xs-12 mx-auto"  >
 				<div class="service-block color-bg text-center">
 					<div class="service-icon text-center">
-						<img src="{{url_for('static', filename='Images/icons/bitcoin-network.png')}}" alt="">
+						<img src="{{url_for('static', filename='Images/icons/icon3.png')}}" style="height:20%; width:20%" alt="">
 					</div>
-					<h3>Strong Network</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur.. Sed id lorem eget orci dictum facilisis vel id tellus. Nullam iaculis arcu at mauris dapibus consectetur.</p>
+					<h3>Sir John Templeton</h3>
+					<p>"The four most dangerous words in investing are, it’s different this time."</p>
 				</div>
 			</div>
 		</div> 		<!-- End row -->
 	</div>   	<!-- End container -->
 </section>   <!-- End section -->
 
-
-<!--
-Start Call To Action
-==================================== -->
-<!-- <section class="call-to-action section-sm">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12 text-center">
-				<h2>Open account for free and start trading Bitcoins now!</h2>
-				<p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicudin bibendum auctor, <br> nisi elit consequat ipsum, nesagittis sem nid elit. Duis sed odio sitain elit.</p>
-				<a href="" class="btn btn-main">Get Started</a>
-			</div>
-		</div> 		
-	</div>   	
-</section>    -->
-
 <!-- Predicition Section -->
-<section class="about-2 section bg-gray" id="about">
+<section class="about-2 section bg-gray" id="prediction">
 	<div class="container">
 		<div class="row">
             <div class="col-12 col-md-6">
@@ -494,7 +442,7 @@ Start Call To Action
 <!-- Start Testimonial
 =========================================== -->
 		
-	<section class="testimonial section" id="testimonial">
+	<section class="testimonial section" id="heardonthestreet">
 		<div class="container">
       <div class="col-12 col-md-12 align-self-center mb-4 mb-md-0">
         <div class="align-self-center">
@@ -517,17 +465,6 @@ Start Call To Action
                     <!-- <blockquote class="twitter-tweet"><p lang="en" dir="ltr">The housing market heats up every spring, but this year is different. <br><br>So many people are offering all cash to buy homes that those who need mortgages are skipping inspections and appraisals. <br><br>🧵 Here&#39;s why that can be risky: <a href="https://t.co/SeQ95fry5C">https://t.co/SeQ95fry5C</a></p>&mdash; MarketWatch (@MarketWatch) <a href="https://twitter.com/MarketWatch/status/1383101978088210440?ref_src=twsrc%5Etfw">April 16, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
                     <a class="twitter-timeline" data-height="500" href="https://twitter.com/MarketWatch?ref_src=twsrc%5Etfw">Tweets by MarketWatch</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     							</div>
-    							<!-- /client info -->
-    							<!-- client photo -->
-                                <!-- <div class="media client-meta">
-                                  <img class="mr-3 client-thumb" src="images/client-logo/clients-1.jpg" alt="Generic placeholder image">
-                                  <div class="media-body">
-                                    <h4 class="mt-0">Matt Cutts</h4>
-                                    <p>CEO, Themefisher</p>
-                                  </div>
-                                </div> -->
-    							
-    							<!-- /client photo -->
                             </div>
 						</div>
 						<!-- /testimonial single -->
@@ -630,7 +567,7 @@ Start Call To Action
 <!--
 Start Blog Section
 =========================================== -->
-<section class="blog section" id="blog">
+<section class="blog section" id="aboutme">
 	<div class="container">
 		<div class="row">
 			<div class="col">
@@ -713,7 +650,14 @@ Start Call To Action
 		<div class="row">
 			<div class="col-md-12 text-center">
 				<h2>Let's Connect! Please reach out via</h2>
-				<p>Email: vsong3925@gmail.com<br>Github: github.com/vsong3925<br>LinkedIn: /in/zenanverasong/</p>
+        <br>
+        <div class="post-meta">
+          <span>Email:</span> <a href="" class="" style="color:#fff">vsong3925@gmail.com</a>
+          <br>
+          <span>GitHub:</span> <a href="https://github.com/vsong3925" class="" style="color:#fff">github.com/vsong3925</a>
+          <br>
+          <span>LinkedIn:</span> <a href="https://www.linkedin.com/in/zenanverasong/" class="" style="color:#fff">/in/zenanverasong/</a>
+        </div>
 				<a href="https://docs.google.com/document/d/1QFlIUs5jUSLFSy2KjPTQlyGYrPuwWouCBLpx9NP-83E/edit?usp=sharing" class="btn btn-main">Read Resume</a>
 			</div>
 		</div> 		<!-- End row -->
