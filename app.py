@@ -23,11 +23,10 @@ if is_heroku == True:
     remote_db_name = os.environ.get('remote_db_name')
     remote_db_user = os.environ.get('remote_db_user')
     remote_db_pwd = os.environ.get('remote_db_pwd')
-    API_key = os.environ.get('API_key')
     api_key = os.environ.get('api_key')
 else:
     # use the config.py file if IS_HEROKU is not detected
-    from config import remote_db_endpoint, remote_db_port, remote_db_name, remote_db_user, remote_db_pwd, API_key, api_key
+    from config import remote_db_endpoint, remote_db_port, remote_db_name, remote_db_user, remote_db_pwd, api_key
 
 #%%
 app = Flask(__name__)
@@ -38,10 +37,6 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
-#%%
-@app.route("/signup")
-def signup():
-    return render_template('signup.html')
 #%%
 @app.route("/tickerlist")
 def tickerlist(): 
