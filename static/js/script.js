@@ -4,27 +4,11 @@
   /* ========================================================================= */
   /*	Page Preloader
   /* ========================================================================= */
-  $(window).on('load', function () {
-    $('#preloader').fadeOut('slow', function () {
-      $(this).remove();
-    });
-  });
-
-  /* ========================================================================= */
-  /*	Graph Values
-  /* =========================================================================  */
-  // var trace1 = {
-  //   x: [1, 2, 3, 4],
-  //   y: [10, 15, 13, 17],
-  //   type: 'scatter'
-  // };
-  // var trace2 = {
-  //   x: [1, 2, 3, 4],
-  //   y: [16, 5, 11, 9],
-  //   type: 'scatter'
-  // };
-  // var data = [trace1, trace2];
-  // Plotly.newPlot('myDiv', data);
+  // $(window).on('load', function () {
+  //   $('#preloader').fadeOut('slow', function () {
+  //     $(this).remove();
+  //   });
+  // });
 
   /* ========================================================================= */
   /*	Testimonial Carousel
@@ -177,9 +161,9 @@
   /* ========================================================================= */
   /*	Portfolio Filtering Hook
   /* =========================================================================  */
-  $('.play-icon i').on('click', function () {
-    var video = '<iframe allowfullscreen src="' + $(this).attr('data-video') + '"></iframe>';
-    $(this).replaceWith(video);
-  });
+  // $('.play-icon i').on('click', function () {
+  //   var video = '<iframe allowfullscreen src="' + $(this).attr('data-video') + '"></iframe>';
+  //   $(this).replaceWith(video);
+  // });
 
 })(jQuery);
