@@ -59,6 +59,14 @@
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
 
+  <!-- hero image-->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="parallax-hero.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+
   <!-- logic.js -->
   <script src="{{ url_for('static', filename='js/logic.js')}}" defer></script>
   <script src="{{ url_for('static', filename='js/script.js')}}" defer></script>
@@ -206,7 +214,33 @@ Fixed Navigation
 Welcome Slider
 ==================================== -->
 
-<section class="hero-area">
+<!-- <section class="hero-area">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 align-self-center mb-4 mb-lg-0">
+				<div class="video-player">
+					<img class="img-fluid rounded" src="{{url_for('static', filename='Images/slider/slider-bg-2.jpg')}}" alt="">
+					<a class="play-icon">
+						<i class="tf-ion-ios-play" data-video="https://www.youtube.com/embed/p7HKvqRI_Bo"></i>
+					</a>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div class="block">
+					<h2>Stock Market Performance - Past Present and Future</h2>
+					<p>Live track stock performance, review the stock market performance over the past 20 years and preview the performance prediction in 2021.</p>
+					<ul class="list-inline">
+						<li class="list-inline-item">
+							<a data-scroll href="#performance" class="btn btn-main">Explore Us</a>		
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>	 -->
+
+<section class="introduction" style="margin-top:150px; margin-bottom:150px;">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6 align-self-center mb-4 mb-lg-0">
@@ -231,6 +265,7 @@ Welcome Slider
 		</div>
 	</div>
 </section>	
+
 
 <!--
 Start About Section
