@@ -720,7 +720,7 @@ a:focus, a:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("../Images/slider/slider-bg-2.jpg");
+  background-image: url("/static/Images/slider/slider-bg-2.jpg");
   background-size: cover;
   background-attachment: fixed;
   position: relative;
@@ -735,7 +735,6 @@ a:focus, a:hover {
 .hero-area:before {
   content: '';
   background: rgba(49, 187, 158, 0.84);
-  /* background-image: url("../Images/slider/slider-bg-2.jpg"); */
   opacity: 0.5;
   position: absolute;
   top: 0;
