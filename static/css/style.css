@@ -734,8 +734,8 @@ a:focus, a:hover {
 
 .hero-area:before {
   content: '';
-  /* background: rgba(49, 187, 158, 0.84); */
-  background-image: url("../Images/slider/slider-bg-2.jpg");
+  background: rgba(49, 187, 158, 0.84);
+  /* background-image: url("../Images/slider/slider-bg-2.jpg"); */
   opacity: 0.5;
   position: absolute;
   top: 0;
@@ -759,6 +759,7 @@ a:focus, a:hover {
 .hero-area .block h2 {
   font-size: 48px;
   margin-bottom: 20px;
+  color:#fff
 }
 
 .hero-area .block p {
