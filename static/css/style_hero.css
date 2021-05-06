@@ -1,0 +1,64 @@
+/* create before pseudo element for header and add background image */
+.hero ::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    background: url('slider-bg-2.jpg');
+    background-size: cover;
+    z-index: 0;
+ }
+
+ /* Bring the text in front */
+ #herotext {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    padding: 0 30px;
+    font-family: 'Roboto Condensed', sans-serif;
+ }
+ #headertitle {
+    font-size: 4.5rem;
+    font-weight: 700;
+    color: #009688;
+ }
+ #headersubtitle {
+    font-size: 2.2rem;
+    font-weight: 300;
+ }
+
+ /* Style the text section */
+ section{
+    width: 100%;
+    background: white;
+ }
+ .container {
+    margin: auto; /* To center the text horizontally */
+    max-width: 1000px; /* Limiting the width for extra large screens */
+    padding: 80px 40px;
+ }
+ .container h3 {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 3rem;
+ }
+ .container p {
+    padding-top: 30px;
+    line-height: 1.8;
+ }
+
+ /* add parallax effect */
+ body {
+    /* Existing styles here */
+    perspective: 4px; /* The depth */
+    overflow-x: hidden;
+    overflow-y: scroll;
+ }
+ 
+ html {
+    /* Existing styles here */
+    overflow: hidden;
+ }

@@ -734,7 +734,7 @@ a:focus, a:hover {
 
 .hero-area:before {
   content: '';
-  background: rgba(49, 187, 158, 0.84);
+  /* background: rgba(49, 187, 158, 0.84); */
   position: absolute;
   top: 0;
   right: 0;
@@ -743,7 +743,7 @@ a:focus, a:hover {
 }
 
 .hero-area .block {
-  color: #fff;
+  color:rgba(49, 187, 158, 0.84); /* color: #fff; */
   padding-left: 30px;
 }
 
