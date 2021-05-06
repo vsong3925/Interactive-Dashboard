@@ -734,8 +734,8 @@ a:focus, a:hover {
 
 .hero-area:before {
   content: '';
-  /* background: rgba(49, 187, 158, 0.84);
-  opacity: 0.5; */
+  background: rgba(49, 187, 158, 0.84);
+  opacity: 0.5;
   position: absolute;
   top: 0;
   right: 0;
@@ -758,7 +758,7 @@ a:focus, a:hover {
 .hero-area .block h2 {
   font-size: 48px;
   margin-bottom: 20px;
-  color:#fff
+  color:black 
 }
 
 .hero-area .block p {
